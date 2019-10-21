@@ -7,5 +7,6 @@ namespace MyVet.Web.Models
 {
     public class LoginViewModel
     {
+
     }
 }
