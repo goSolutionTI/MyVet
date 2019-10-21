@@ -22,7 +22,7 @@ namespace MyVet.Web.Controllers
         // GET: Agenda
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Agendas.ToListAsync());
+            return View(await _context.Agendas.OrderBy(x=> x.DateLocal).ToListAsync());
         }
 
         // GET: Agenda/Details/5

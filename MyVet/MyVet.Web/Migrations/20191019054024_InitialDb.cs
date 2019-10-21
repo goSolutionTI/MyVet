@@ -1,13 +1,31 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace MyVet.Web.Migrations
 {
-    public partial class _1810192007 : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Owners",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Document = table.Column<string>(maxLength: 30, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    FixedPhone = table.Column<string>(maxLength: 12, nullable: false),
+                    CellPhone = table.Column<string>(maxLength: 12, nullable: false),
+                    Address = table.Column<string>(maxLength: 150, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Owners", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "PetTypes",
                 columns: table => new
@@ -66,7 +84,7 @@ namespace MyVet.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Agendar",
+                name: "Agendas",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -79,15 +97,15 @@ namespace MyVet.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Agendar", x => x.Id);
+                    table.PrimaryKey("PK_Agendas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Agendar_Owners_OwnerId",
+                        name: "FK_Agendas_Owners_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Owners",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Agendar_Pets_PetId",
+                        name: "FK_Agendas_Pets_PetId",
                         column: x => x.PetId,
                         principalTable: "Pets",
                         principalColumn: "Id",
@@ -124,13 +142,13 @@ namespace MyVet.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agendar_OwnerId",
-                table: "Agendar",
+                name: "IX_Agendas_OwnerId",
+                table: "Agendas",
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agendar_PetId",
-                table: "Agendar",
+                name: "IX_Agendas_PetId",
+                table: "Agendas",
                 column: "PetId");
 
             migrationBuilder.CreateIndex(
@@ -157,7 +175,7 @@ namespace MyVet.Web.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Agendar");
+                name: "Agendas");
 
             migrationBuilder.DropTable(
                 name: "ClinicHistories");
@@ -167,6 +185,9 @@ namespace MyVet.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "ServiceTypes");
+
+            migrationBuilder.DropTable(
+                name: "Owners");
 
             migrationBuilder.DropTable(
                 name: "PetTypes");

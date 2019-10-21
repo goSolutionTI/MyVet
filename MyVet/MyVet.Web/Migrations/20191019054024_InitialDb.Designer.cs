@@ -10,14 +10,14 @@ using MyVet.Web.Data;
 namespace MyVet.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191019011923_18.10.19.20.07")]
-    partial class _1810192007
+    [Migration("20191019054024_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -43,7 +43,7 @@ namespace MyVet.Web.Migrations
 
                     b.HasIndex("PetId");
 
-                    b.ToTable("Agendar");
+                    b.ToTable("Agendas");
                 });
 
             modelBuilder.Entity("MyVet.Web.Data.Entities.Pet", b =>
@@ -141,7 +141,7 @@ namespace MyVet.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adrdress")
+                    b.Property<string>("Address")
                         .HasMaxLength(150);
 
                     b.Property<string>("CellPhone")
